@@ -5,7 +5,10 @@ import { CreateRequest } from '../interfaces';
 
 export enum HttpMethod {
     GET= 'get',
-    POST='post'
+    POST='post',
+    PUT = 'put',
+    PATCH = 'patch',
+    DELETE = 'delete',
 }
 
 
@@ -50,6 +53,13 @@ export function createPostRequest(
   onLoading: Dispatch<boolean>,
 ): CreateRequest {
   return createRequest(HttpMethod.POST, onError, onLoading);
+}
+
+export function createPatchRequest(
+  onError: Dispatch<AxiosResponse | undefined | null>,
+  onLoading: Dispatch<boolean>,
+): CreateRequest {
+  return createRequest(HttpMethod.PATCH, onError, onLoading);
 }
 // import axios, { AxiosResponse } from 'axios';
 // import { Dispatch } from 'react';

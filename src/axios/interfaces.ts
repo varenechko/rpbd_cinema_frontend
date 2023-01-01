@@ -14,13 +14,18 @@ export interface RequestResponse {
 /** Send GET request and obtain response.  */
 export interface GetLazyRequestResponse extends RequestResponse {
   /** Method send GET request. */
-  getRequest: (url: string) => AxiosResponse;
+  getRequest: (url: string, body?: Record<string, unknown>) => AxiosResponse;
 }
 
 /** Send POST request and obtain response.  */
 export interface PostLazyRequestResponse extends RequestResponse {
   /** Method send POST request. */
-  postRequest: (url: string, body: Record<string, unknown>) => AxiosResponse;
+  postRequest: (url: string, body: Record<any, unknown>) => AxiosResponse;
+}
+
+export interface PatchLazyRequestResponse extends RequestResponse {
+  /** Method send POST request. */
+  patchRequest: (url: string, body: Record<string, unknown>) => AxiosResponse;
 }
 
 /** Method */

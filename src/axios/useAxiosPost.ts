@@ -24,7 +24,7 @@ export const useAxiosPost = (): PostLazyRequestResponse => {
   const [error, setError] = useState<AxiosResponse | undefined | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const postRequest = (url: string, body: Record<string, unknown>) => {
+  const postRequest = (url: string, body: Record<any, unknown>) => {
     setIsLoading(true);
     return createPostRequest( setError, setIsLoading)(url, body);
   };

@@ -10,7 +10,7 @@ import { Button, Typography } from "@mui/material";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { sendPostRequest } from "../../axios/hooks";
 import { UserContext } from "../../shared/contexts/UserContext/UserContext";
-import { IUser } from "../../shared/interfaces/user.interfase";
+import { IUser } from "../../shared/interfaces/user.interface";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useAxiosPost } from "../../axios/useAxiosPost";
 import { LoginError } from "../../components/LoginError/LoginError";
@@ -54,7 +54,7 @@ export const LoginPage: FC = observer(() => {
     }
   };
 
-  if (sessionStorage.getItem("isLoggedIn") === "true" ? true : false) return <Navigate to="/" replace={true} />;
+  if (sessionStorage.getItem("isLoggedIn") === "true" ? true : false && userStore?.user?.id) return <Navigate to="/" replace={true} />;
 
   return (
     <BoxStyled>

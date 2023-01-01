@@ -3,14 +3,14 @@ import { Box } from "@mui/material";
 
 export const BoxStyled = styled(Box)`
   width: 100%;
-  height: calc(100% - 200px);
+  min-height: calc(100% - 200px);
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 export const ContentWrapper = styled(Box)`
   width: 80%;
-  height: calc(100% - 200px);
+  min-height: calc(100% - 200px);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

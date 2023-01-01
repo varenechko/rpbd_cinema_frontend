@@ -9,6 +9,7 @@ export const BoxStyled = styled(Box)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: white;
 `;
 
 export const SignUpWrapper = styled("div")`

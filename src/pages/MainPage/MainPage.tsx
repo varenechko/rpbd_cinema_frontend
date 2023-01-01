@@ -1,28 +1,48 @@
-import { TabContext, TabList, TabPanel } from "@mui/lab"
 import { Box,  Tab } from "@mui/material"
 import { useState } from "react";
 import { Films } from "./components/Films/Films";
+import { TopFilms } from "./components/TopFilms/TopFilms";
 import { TabsStyled } from "./styles";
 
 export const MainPage = () => {
-    const [value, setValue] = useState('1');
+    const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  function TabPanel(props: any) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`vertical-tabpanel-${index}`}
+        aria-labelledby={`vertical-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            {children}
+          </Box>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <Box sx={{ width: '100%', typography: 'body1', background: '#14181c url(	https://s.ltrbxd.com/static/img/content-bg.0d9a0f0f.png) 0 -1px repeat-x;' }}>
-      <TabContext value={value}>
-          <TabsStyled onChange={handleChange} centered>
-            <Tab label="Фильмы" value="1" />
-            <Tab label="Кинотеатры" value="2" />
-            <Tab label="Item Three" value="3" />
+    <Box sx={{ width: '100%', typography: 'body1'}}>
+      {/* <TabContext value={value}> */}
+          <TabsStyled value={value} onChange={handleChange} centered>
+            <Tab label="Фильмы" />
+            <Tab label="Топ фильмов" />
+            <Tab label="Item Three" />
           </TabsStyled>
-        <TabPanel value="1" ><Films/></TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
-      </TabContext>
+        <TabPanel value={value} index={0}><Films/></TabPanel>
+        <TabPanel value={value} index={1}><TopFilms/></TabPanel>
+        <TabPanel value={value} index={2}>Item Three</TabPanel>
+      {/* </TabContext> */}
     </Box>
   );
 }

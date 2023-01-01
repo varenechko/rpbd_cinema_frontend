@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { IUser } from "../../interfaces/user.interfase";
+import { IUser } from "../../interfaces/user.interface";
 
 interface AuthContextProps {
   user: IUser | undefined;

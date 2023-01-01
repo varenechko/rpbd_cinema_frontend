@@ -1,5 +1,5 @@
 import { makeObservable, observable, computed, action, flow } from "mobx"
-import { IUser } from "../shared/interfaces/user.interfase"
+import { IUser } from "../shared/interfaces/user.interface"
 
 class UserStore {
     user: IUser | null = null

@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { IUser } from './shared/interfaces/user.interfase';
+import { IUser } from './shared/interfaces/user.interface';
 import { UserContext } from './shared/contexts/UserContext/UserContext';
 import { LoginPage } from './pages/Login/Login';
 import { SignUpPage } from './pages/SignUp/SignUp';
 import { Header } from './components/Header/Header';
 import { RequireAuth } from './components/ProtectedRoutes/RequireAuth';
 import { RequireAdmin } from './components/ProtectedRoutes/RequireAdmin';
-import { AdminPage } from './pages/AdminPage/AdminPage';
+import { AdminPage } from './pages/Admin/AdminPage/AdminPage';
 import { MainPage } from './pages/MainPage/MainPage';
 import { theme } from './shared/theme';
 import { ThemeProvider } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 import userStore from './store/UserStore';
+import { FilmSessionsPage } from './pages/FilmSessionsPage/FilmSessions';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
+import { SessionPage } from './pages/SessionPage/SessionPage';
+import { AddSessionPage } from './pages/Admin/AddSessionPage/AddSessionPage';
+import { TopFilms } from './pages/MainPage/components/TopFilms/TopFilms';
 
 const App = observer(() => {
   // const [user, setUser] = useState<IUser | undefined>(undefined);
@@ -54,6 +59,44 @@ const App = observer(() => {
               element={
                 <RequireAdmin>
                   <AdminPage/>
+                </RequireAdmin>
+              }
+            />
+            <Route
+              path="film/:id"
+              element={
+                  <FilmSessionsPage />
+              }
+            />
+            <Route
+              path="session/:id"
+              element={
+                <RequireAuth>
+                  <SessionPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="profile/:id"
+              element={
+                <RequireAuth>
+                  <ProfilePage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="add-session"
+              element={
+                // <RequireAdmin>
+                  <AddSessionPage />
+                // </RequireAdmin>
+              }
+            />
+            <Route
+              path="top-films"
+              element={
+                <RequireAdmin>
+                  <TopFilms />
                 </RequireAdmin>
               }
             />

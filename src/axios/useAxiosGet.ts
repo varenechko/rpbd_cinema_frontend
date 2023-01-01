@@ -7,7 +7,7 @@ export const useAxiosGet = (): GetLazyRequestResponse => {
     const [error, setError] = useState<AxiosResponse | undefined | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
   
-    const getRequest = (url: string) => {
+    const getRequest = (url: string) => {      
       setIsLoading(true);
       return createGetRequest( setError, setIsLoading)(url);
     };

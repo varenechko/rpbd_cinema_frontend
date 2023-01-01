@@ -10,15 +10,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { FC, MouseEvent, useContext, useState } from "react";
+import { FC, MouseEvent, useState } from "react";
 import { theme } from "../../shared/theme";
 import { NavLink, useNavigate } from "react-router-dom";
-import { UserContext } from "../../shared/contexts/UserContext/UserContext";
 import userStore from "../../store/UserStore";
 import { observer } from "mobx-react-lite";
 
-const pages = ["Список страниц"];
-const settings = ["профиль", "аккаунт", "выйти"];
+const pages: string[] = [];
+// const settings = ["профиль", "билеты", "выйти"];
+const settings = ["профиль", "билеты", "выйти", "войти"];
 
 export const Header: FC = observer(() => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -41,13 +41,21 @@ export const Header: FC = observer(() => {
     setting: string
   ) => {
     switch (setting) {
-      case settings[2]:
-        sessionStorage.setItem("isLoggedIn", "false");
-        sessionStorage.clear();
-        navigate("/login");
-        userStore.resetUserInfo();
-        break;
-
+      case settings[0]:
+        navigate(`/profile/${userStore.user?.id}`)
+      break;
+      case settings[1]:
+          navigate(`/my-tickets/${userStore.user?.id}`);
+          break;
+          case settings[2]:
+            sessionStorage.setItem("isLoggedIn", "false");
+            sessionStorage.clear();
+            navigate("/login");
+            userStore.resetUserInfo();
+            break;
+      case settings[3]:
+           navigate(`/login`);
+            break;
       default:
         break;
     }
@@ -157,14 +165,18 @@ export const Header: FC = observer(() => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings.map((setting, index) => {
+                // console.log((userStore.user === null && index === 3) || (userStore.user !== null && index !== 3));
+                
+                if ((userStore.user === null && index === 3) || (userStore.user !== null && index !== 3))
+                return (
                 <MenuItem
                   key={setting}
                   onClick={(e) => handleMenuItemClick(e, setting)}
                 >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              )})}
             </Menu>
           </Box>
         </Toolbar>
